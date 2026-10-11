@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alocação de Vagas</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(135deg,
+                    #000000 0%,
+                    #1a0000 45%,
+                    #100101 75%,
+                    #2e2525 100%);
+
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 750px;
+
+            background: white;
+
+            border-radius: 24px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, .20);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 120px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            color: #0f172a;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .upload-box {
+            border: 2px dashed #dbe2ea;
+            border-radius: 18px;
+
+            padding: 20px;
+
+            margin-bottom: 18px;
+
+            transition: all .3s ease;
+        }
+
+        .upload-box:hover {
+            border-color: #2563eb;
+            background: #f8fbff;
+            transform: translateY(-2px);
+        }
+
+        .upload-box label {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        input[type=file] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .botao {
+            width: 100%;
+            border: none;
+
+            height: 58px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(135deg,
+                    #06070a,
+                    #170a07);
+
+            color: white;
+
+            font-size: 17px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .botao:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(3, 4, 6, 0.4);
+        }
+
+        .erro {
+            margin-top: 20px;
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: #fee2e2;
+            color: #b91c1c;
+
+            border-left: 5px solid #dc2626;
+        }
+
+        .info {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 25px;
+
+            color: #475569;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LOGO (opcional) -->
+        <!--
+    <div class="logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+    </div>
+    -->
+
+        <div class="header">
+            <h1>Processo de alocação de Vagas</h1>
+            <p>Automatização de processos em Python para locação de vagas da Polícia Militar - SP</p>
+        </div>
+
+        <div class="info">
+            Certifique-se de anexar os três arquivos atualizados antes de realizar o processamento.
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <div class="upload-box">
+                <label>🏆 Classificação</label>
+                <input type="file" name="classificacao" accept=".xlsx" required>
+            </div>
+
+            <div class="upload-box">
+                <label>📝 Escolha dos Alunos</label>
+                <input type="file" name="escolhas" accept=".xlsx" required>
+            </div>
+
+            <div class="upload-box">
+                <label>🏢 Vagas Disponíveis</label>
+                <input type="file" name="vagas" accept=".xlsx" required>
+            </div>
+
+            <button type="submit" class="botao">
+                ⚙️ Gerar Prévia
+            </button>
+
+        </form>
+
+        {% if erro %}
+        <div class="erro">
+            <strong>Erro:</strong> {{ erro }}
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
